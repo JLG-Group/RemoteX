@@ -7,13 +7,8 @@ import numpy
 import socket
 
 from io import StringIO
+import numpysocket;
 
-s = socket.socket()
-host = socket.gethostname() 
-port = 12345                # 设置端口
-s.bind((host, port))
-
-img = numpy.array(0)
 
 def screen_capture():
     with mss.mss() as sct:
@@ -43,16 +38,8 @@ def screen_capture():
                 break
 
 
-def create_socket():
-    s.listen(5)                 # 等待客户端连接
-    while True:
-        c,addr = s.accept()     # 建立客户端连接
-        print('连接地址：', addr)
-        c.send(img.tostring())
-    c.close()     
-
 def main():
-    create_socket()
+    npSocket = numpysocket.NumpySocket();
     screen_capture()
 
 main();
